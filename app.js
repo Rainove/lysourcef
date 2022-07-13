@@ -3,7 +3,7 @@ var express = require("express");
 const { send } = require("process");
 const { json } = require("express");
 var app = express();
-app.get("/search", function (req, res) {
+app.get("/index", function (req, res) {
   var fs = require("fs");
   var xlsx = require("node-xlsx");
 
