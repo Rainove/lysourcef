@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <input type="text" placeholder="请输入你要查找的姓名" id="input01" />
+      <button onclick="search()">search</button>
+    </div>
+  </body>
+  <script>
+    function search() {
+      var input01 = window.document.querySelector("#input01");
+      var name = input01.value;
+      var objArray;
+      var obj;
+      const xhr = new XMLHttpRequest();
+            xhr.open('gET','http://127.0.0.1:4004/search?name='+name); //get可大小写
+            xhr.send()
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){
+                    if(xhr.status >= 200 && xhr.status < 300){
+                        var respond  = xhr.responseText
+                        objArray = JSON.parse(respond);
+                        if(objArray[0]==1){
+                            obj = objArray[1]
+                            alert('查到了编号为:'+obj['编号']+"姓名为:"+obj["姓名"]+"状态为:"+obj["状态"]);
+                        }
+                        else{
+                            alert("对不起无此信息");
+                        }
+
+                }
+            }
+        }
+    }
+
+    
+  </script>
+</html>
